@@ -15,3 +15,9 @@ node_modules/
 output/playwright/
 test-results/
 vendor
+
+# --- local only, never commit ---
+.gh/
+.omc/
+.claude/settings.local.json
+.project-status.md

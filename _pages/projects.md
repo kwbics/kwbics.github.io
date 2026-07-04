@@ -1,65 +1,34 @@
 ---
 layout: page
-title: projects
-permalink: /projects/
-description: A growing collection of your cool projects.
+permalink: /research/
+title: research
+description: Energy-efficient mixed-signal ICs and systems for biomedical sensing, neural interfaces, and wireless links.
 nav: true
-nav_order: 3
-display_categories: [work, fun]
-horizontal: false
+nav_order: 1
 ---
 
-<!-- pages/projects.md -->
-<div class="projects">
-{% if site.enable_project_categories and page.display_categories %}
-  <!-- Display categorized projects -->
-  {% for category in page.display_categories %}
-  <a id="{{ category }}" href=".#{{ category }}">
-    <h2 class="category">{{ category }}</h2>
-  </a>
-  {% assign categorized_projects = site.projects | where: "category", category %}
-  {% assign sorted_projects = categorized_projects | sort: "importance" %}
-  <!-- Generate cards for each project -->
-  {% if page.horizontal %}
-  <div class="container">
-    <div class="row row-cols-1 row-cols-md-2">
-    {% for project in sorted_projects %}
-      {% include projects_horizontal.liquid %}
-    {% endfor %}
-    </div>
-  </div>
-  {% else %}
-  <div class="row row-cols-1 row-cols-md-3">
-    {% for project in sorted_projects %}
-      {% include projects.liquid %}
-    {% endfor %}
-  </div>
-  {% endif %}
-  {% endfor %}
+We design **system-on-chips (SoCs)** and mixed-signal circuits that **sense, stimulate, and communicate** for biomedical and IoT applications — bridging device physics, circuit design, and system integration. Representative results appear at **ISSCC, Symposium on VLSI, JSSC, A-SSCC, and TBioCAS**; see the [publications](/publications/) page.
 
-{% else %}
+## Bio-medical Sensing & Stimulation Circuits
 
-<!-- Display projects without categories -->
+- Neural recording and stimulation front-ends — closed-loop neural interfaces, LNA-embedded ADCs, high-compliance and charge-balanced stimulators for seizure suppression
+- Bio-impedance spectroscopy and electrical impedance tomography (EIT) for lung-ventilation and physiological monitoring
+- Ultrasound beamforming receivers for endoscopy and portable imaging
+- Non-contact and wearable bio-signal sensing SoCs (ECG, EEG–HEG–HRV, impedance)
 
-{% assign sorted_projects = site.projects | sort: "importance" %}
+## Wireless Power & Data Links for Implants
 
-  <!-- Generate cards for each project -->
+- Body channel communication (BCC) transceivers for wearable and implantable devices
+- Wireless power transfer (WPT) and body-coupled powering for neural implants
+- Miniaturized wireless neural interfaces and neurostimulators for freely-behaving animals
 
-{% if page.horizontal %}
+## Short-range Wireless Transceivers for IoT
 
-  <div class="container">
-    <div class="row row-cols-1 row-cols-md-2">
-    {% for project in sorted_projects %}
-      {% include projects_horizontal.liquid %}
-    {% endfor %}
-    </div>
-  </div>
-  {% else %}
-  <div class="row row-cols-1 row-cols-md-3">
-    {% for project in sorted_projects %}
-      {% include projects.liquid %}
-    {% endfor %}
-  </div>
-  {% endif %}
-{% endif %}
-</div>
+- Ultra-low-power FSK and injection-locked wake-up receivers
+- Implantable and capsule-endoscope communication links
+- Standard-compatible (IEEE 802.15.6) body-area-network transceivers
+
+## High-speed Interfaces
+
+- Wireline receivers with equalization (CTLE / DFE)
+- On-chip interconnect transceivers

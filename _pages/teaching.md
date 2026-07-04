@@ -2,14 +2,29 @@
 layout: page
 permalink: /teaching/
 title: teaching
-description: Course materials, schedules, and resources for classes taught.
+description: Undergraduate and graduate courses in the Dept. of Electrical and Electronics Engineering, Kangwon National University.
 nav: true
-nav_order: 6
-calendar: true
+nav_order: 4
 ---
 
-This page displays a collection of courses with detailed schedules, materials, and resources. You can organize your courses by years, terms, or topics.
+Courses taught in the Department of Electrical and Electronics Engineering, Kangwon National University.
 
-{% include calendar.liquid calendar_id='test@gmail.com' timezone='Asia/Shanghai' %}
+### Graduate
 
-{% include courses.liquid %}
+- CMOS Digital Integrated Circuits
+- CMOS Analog / RF Integrated Circuits
+- Analog Integrated Circuits Design
+- Biomedical Integrated Circuits Design
+- Mixed-mode Integrated Circuits
+- Advanced SoC Design
+- Integrated Circuits and System Design
+
+### Undergraduate
+
+- Electronic Circuits · Electronic Circuits Applications
+- Digital Electronic Circuits
+- Microprocessor Applications and Laboratory
+- Computer Architecture
+- Circuit Theory
+- Capstone Design
+- IoT Platform · IoT Devices and Applications
