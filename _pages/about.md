@@ -6,6 +6,8 @@ subtitle: <strong>Bae's Integrated Circuits and Systems Lab (BICS)</strong> · A
 
 profile:
   align: right
+  image: prof_pic.jpg
+  image_circular: false # crops the image to make it circular
   more_info: >
     <p>Room 321, Engineering Building #1</p>
     <p>Dept. of Electrical and Electronics Engineering</p>

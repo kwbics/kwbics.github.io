@@ -3,7 +3,7 @@ cv:
   label: Associate Professor — Analog / Mixed-Signal IC Design
   email: baej@kangwon.ac.kr
   location: Chuncheon, Republic of Korea
-  image: ""
+  image: "" # al_folio_cv (rendercv) layout renders no profile photo; home page shows it instead
   summary: >
     Associate Professor of Electrical and Electronics Engineering at Kangwon National University,
     directing Bae's Integrated Circuits and Systems Lab (BICS). Technical Program Committee member of
@@ -13,6 +13,8 @@ cv:
   social_networks:
     - network: Google Scholar
       username: DvZKLt8AAAAJ
+    - network: ORCID
+      username: 0000-0002-6375-2248
 
   address:
     city: Chuncheon
