@@ -215,6 +215,12 @@ kramdown:
 # Includes & excludes
 include: ["_pages"]
 exclude:
+  - AGENTS.md
+  - CLAUDE.md
+  - UPSTREAM_AGENTS.md
+  - UPSTREAM_CLAUDE.md
+  - .project-status.md
+  - HARNESS_REDESIGN_PROPOSAL.md
   - al-folio-upgrade-report.md
   - bin/
   - CONTRIBUTING.md
