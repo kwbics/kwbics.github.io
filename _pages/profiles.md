@@ -15,30 +15,30 @@ B.S. / M.S. / Ph.D. in Electrical Engineering, KAIST. Previously Senior Engineer
 
 ## Ph.D. Students
 
-| Name | Since | Research |
-| :--- | :---: | :--- |
-| Byeongseol Kim | 2021 | Wireless power transfer; low-power wireless transceivers |
-| Suhyeon Yoon | 2023 | Mixed-signal ICs; ultrasound beamformer; bio-impedance acquisition |
+| Name           | Since | Research                                                           |
+| :------------- | :---: | :----------------------------------------------------------------- |
+| Byeongseol Kim | 2021  | Wireless power transfer; low-power wireless transceivers           |
+| Suhyeon Yoon   | 2023  | Mixed-signal ICs; ultrasound beamformer; bio-impedance acquisition |
 
 ## M.S. Students
 
-| Name | Since | Research |
-| :--- | :---: | :--- |
-| Seongbin Hwang | 2024 | Wireless power transfer |
-| Wonhyung Lee | 2024 | Noise-shaping ADC |
-| Byungmu Kang | 2025 | AI-enabled smart sensor systems |
-| Seokbeom Cheon | 2025 | Neural interface & brain–computer interface systems |
-| Kyeongju Kim | 2025 | Wireless power transfer |
-| Seunghyuk Cho | 2025 | Ultra-low-power wireless communication for medical devices |
+| Name           | Since | Research                                                   |
+| :------------- | :---: | :--------------------------------------------------------- |
+| Seongbin Hwang | 2024  | Wireless power transfer                                    |
+| Wonhyung Lee   | 2024  | Noise-shaping ADC                                          |
+| Byungmu Kang   | 2025  | AI-enabled smart sensor systems                            |
+| Seokbeom Cheon | 2025  | Neural interface & brain–computer interface systems        |
+| Kyeongju Kim   | 2025  | Wireless power transfer                                    |
+| Seunghyuk Cho  | 2025  | Ultra-low-power wireless communication for medical devices |
 
 ## Alumni
 
-| Name | Degree | Year | Now |
-| :--- | :---: | :---: | :--- |
-| Beomjin Yuk | M.S. | 2021 | Broadcom |
-| Sooin Huh | M.S. | 2022 | ABOV Semiconductor |
-| Seungbum Choi | M.S. | 2023 | ABOV Semiconductor |
-| Seungah Lee | M.S. | 2023 | Samsung Electronics |
+| Name          | Degree | Year | Now                 |
+| :------------ | :----: | :--: | :------------------ |
+| Beomjin Yuk   |  M.S.  | 2021 | Broadcom            |
+| Sooin Huh     |  M.S.  | 2022 | ABOV Semiconductor  |
+| Seungbum Choi |  M.S.  | 2023 | ABOV Semiconductor  |
+| Seungah Lee   |  M.S.  | 2023 | Samsung Electronics |
 
 ---
 
