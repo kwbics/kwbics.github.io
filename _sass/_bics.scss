@@ -1,0 +1,160 @@
+:root {
+  --global-theme-color: #243394;
+  --global-hover-color: #243394;
+  --global-hover-text-color: white;
+}
+
+html[data-theme="dark"] {
+  --global-theme-color: #96a4fd;
+  --global-hover-color: #96a4fd;
+  --global-hover-text-color: #1c1c1d;
+}
+
+#navbar {
+  min-height: 72px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+
+#navbar .bics-brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 0;
+  padding: 10px 16px;
+  line-height: 1;
+}
+
+.bics-brand img {
+  display: block;
+  height: 32px;
+  width: auto;
+}
+
+.bics-brand .bics-brand-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .bics-brand {
+  .bics-brand-light { display: none; }
+  .bics-brand-dark { display: block; }
+}
+
+body.fixed-top-nav {
+  padding-top: 72px;
+}
+
+body :is(h1, h2, h3, h4, h5, h6) {
+  scroll-margin-top: 88px;
+}
+
+@media (max-width: 959.98px) {
+  #navbar.navbar-expand-sm,
+  #navbar.navbar-expand-sm > .container {
+    flex-wrap: wrap !important;
+  }
+
+  #navbar .navbar-toggler-main {
+    display: block !important;
+    margin-left: auto;
+  }
+
+  #navbar #navbarNav {
+    display: none !important;
+    flex-basis: 100%;
+    flex-grow: 1;
+    min-width: 0;
+    text-align: left;
+    max-height: calc(100vh - 72px);
+    max-height: calc(100dvh - 72px);
+    overflow-y: auto;
+  }
+
+  #navbar #navbarNav.show {
+    display: flex !important;
+  }
+
+  #navbar .navbar-menu-list {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  #navbar .dropdown-menu {
+    position: static !important;
+    max-width: 100%;
+  }
+
+  #navbar .nav-link,
+  #navbar .dropdown-item {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  #navbar #light-toggle {
+    transform: none;
+  }
+
+  .post-title,
+  .post-description,
+  .publications .title,
+  table th,
+  table td {
+    overflow-wrap: anywhere;
+  }
+
+  .table-responsive,
+  .table-wrapper,
+  .bootstrap-table,
+  .fixed-table-container {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .table-responsive,
+  .table-wrapper {
+    overflow-x: auto;
+  }
+}
+
+// Match the theme's cascade layer so its important desktop rule cannot open the mobile menu.
+@layer components {
+  @media (max-width: 959.98px) {
+    #navbar #navbarNav {
+      display: none !important;
+    }
+
+    #navbar #navbarNav.show {
+      display: flex !important;
+    }
+  }
+}
+
+
+.bics-roster {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+
+  table { width: 100%; }
+
+  th, td {
+    overflow-wrap: normal;
+    word-break: normal;
+    padding: 0.6rem 0.45rem;
+  }
+
+  th { white-space: nowrap; }
+}
+
+.publications h2.bibliography {
+  color: var(--global-text-color);
+}
+
+.bics-member-photo {
+  display: block;
+  width: 72px;
+  height: auto;
+  margin-bottom: 0.4rem;
+}

@@ -15,7 +15,6 @@ Kangwon National University
 
 - **Email** — [baej@kangwon.ac.kr](mailto:baej@kangwon.ac.kr)
 - **Office** — +82-33-250-6292
-- **Lab** — +82-33-243-0814
 - **Google Scholar** — [profile](https://scholar.google.com/citations?user=DvZKLt8AAAAJ)
 - **Department** — [EEE, Kangwon National University](http://eee.kangwon.ac.kr)
 

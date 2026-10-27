@@ -21,3 +21,4 @@ vendor
 .omc/
 .claude/settings.local.json
 .project-status.md
+design/

@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <strong>Bae's Integrated Circuits and Systems Lab (BICS)</strong> · Associate Professor, <a href="http://eee.kangwon.ac.kr" target="_blank">Dept. of Electrical and Electronics Engineering</a>, Kangwon National University
+subtitle: <strong>Bae's Integrated Circuits and Systems Lab (BICS)</strong> · <a href="http://eee.kangwon.ac.kr" target="_blank">Dept. of Electrical and Electronics Engineering</a>, Kangwon National University
 
 profile:
   align: right
@@ -13,7 +13,7 @@ profile:
     <p>Dept. of Electrical and Electronics Engineering</p>
     <p>Kangwon National University</p>
     <p>Chuncheon 24341, Republic of Korea</p>
-    <p>Office: +82-33-250-6292 · Lab: +82-33-243-0814</p>
+    <p>Office: +82-33-250-6292</p>
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -29,7 +29,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Welcome to **KANGWON BICS** — *Bae's Integrated Circuits and Systems Lab* at Kangwon National University. We design **energy-efficient mixed-signal integrated circuits and systems** for IoT, bio-medical sensors, neural interfaces, and body-area networks. Our chips **sense, stimulate, and communicate** — spanning body channel communication, wireless power transfer, neural recording/stimulation front-ends, bio-impedance and ultrasound sensing, and high-speed interfaces.
+Welcome to **KANGWON BICS** — *Bae's Integrated Circuits and Systems Lab* at Kangwon National University. We study **mixed-signal integrated circuits and system architectures** for neural interfaces, FPGA-based sensor systems, and high-speed wireline links. Our work spans low-noise recording and stimulation front-ends, wireless power and data links for implants, sensor-to-FPGA streaming data paths, and transmitter, receiver, and clocking circuits for serial interfaces.
 
 **Joonsung Bae** is an Associate Professor in the Department of Electrical and Electronics Engineering at Kangwon National University. He received the B.S. (2007), M.S. (2009), and Ph.D. (2013) degrees in Electrical Engineering from KAIST. He was a Senior Engineer at Samsung Electronics (Memory Business, 2013–2014), an R&D researcher at [imec](https://www.imec-int.com/){:target="_blank"}, Belgium (2015–2017), and joined Kangwon National University in 2017. He serves on the Technical Program Committees of IEEE ISSCC (since 2018) and IEEE A-SSCC (since 2021), and received the A-SSCC Best Design Award in 2011 and 2014.
 

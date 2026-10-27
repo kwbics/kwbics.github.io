@@ -1,0 +1,338 @@
+// Research page (/research/) — all rules scoped to .bics-research.
+// Colors come from the theme variables so light and dark modes follow the site.
+// Secondary text retains contrast against the current theme background.
+
+$rf-muted: color-mix(in srgb, var(--global-text-color) 75%, var(--global-bg-color));
+$rf-rule: var(--global-divider-color, rgba(127, 127, 127, 0.3));
+$rf-accent: var(--global-theme-color);
+
+// Vertical form of the block flow: used for the high-speed link at all widths
+// and for every flow on narrow screens. Emits nothing on its own.
+@mixin bics-research-flow-vertical {
+  flex-direction: column;
+
+  .rf-node {
+    flex: 0 0 auto;
+  }
+
+  .rf-link {
+    flex: 0 0 auto;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.75rem;
+    min-height: 3.25rem;
+    padding: 0.2rem 0;
+  }
+
+  .rf-lane {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 0.7rem;
+    text-align: left;
+  }
+
+  .rf-lane::before {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: auto;
+    border-top: 0;
+    border-left: 2px solid $rf-accent;
+  }
+
+  .rf-lane--fwd::after {
+    top: auto;
+    right: auto;
+    bottom: -2px;
+    left: -4px;
+    border-top: 8px solid $rf-accent;
+    border-right: 5px solid transparent;
+    border-bottom: 0;
+    border-left: 5px solid transparent;
+  }
+
+  .rf-lane--rev::after {
+    top: -2px;
+    right: auto;
+    bottom: auto;
+    left: -4px;
+    border-top: 0;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid $rf-accent;
+    border-left: 5px solid transparent;
+  }
+}
+
+.bics-research {
+  .rf-intro {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 46rem;
+  }
+
+  // In-page topic links
+  .rf-toc ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rf-toc a {
+    font-weight: 600;
+    color: $rf-accent;
+  }
+
+  // Stacked topic sections separated by a thin rule
+  .rf-section {
+    margin-top: 2.25rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid $rf-rule;
+    scroll-margin-top: 5rem;
+  }
+
+  .rf-section h2 {
+    margin: 0 0 0.75rem;
+  }
+
+  .rf-focus {
+    margin: 0.75rem 0 0;
+    padding-left: 1.15rem;
+  }
+
+  .rf-focus li {
+    margin-bottom: 0.3rem;
+  }
+
+  // Text beside figure (neural) or figure beside text (high-speed)
+  .rf-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .rf-split--reverse {
+    grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+  }
+
+  .rf-split--reverse .rf-figure {
+    order: -1;
+  }
+
+  .rf-split .rf-figure {
+    margin: 0;
+  }
+
+  // Selected papers
+  .rf-papers-title {
+    margin: 1.25rem 0 0.5rem;
+    font-size: 1rem;
+  }
+
+  .rf-papers {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.92rem;
+  }
+
+  .rf-papers li {
+    margin-bottom: 0.6rem;
+  }
+
+  .rf-venue {
+    display: block;
+    font-size: 0.82rem;
+    color: $rf-muted;
+  }
+
+  // Figures and captions
+  .rf-figure {
+    margin: 1.25rem 0 0;
+  }
+
+  .rf-figure--wide {
+    max-width: 48rem;
+  }
+
+  .rf-figure figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: $rf-muted;
+  }
+
+  // Inline SVG diagram (neural)
+  .rf-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .rf-svg .rf-box {
+    fill: none;
+    stroke: $rf-accent;
+    stroke-width: 2;
+  }
+
+  .rf-svg .rf-box--context {
+    stroke: $rf-muted;
+    stroke-width: 1.5;
+    stroke-dasharray: 5 4;
+  }
+
+  .rf-svg .rf-line {
+    fill: none;
+    stroke: $rf-accent;
+    stroke-width: 2;
+  }
+
+  .rf-svg .rf-head {
+    fill: $rf-accent;
+  }
+
+  .rf-svg text {
+    fill: var(--global-text-color);
+    text-anchor: middle;
+  }
+
+  .rf-svg .rf-label {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .rf-svg .rf-sub {
+    font-size: 14px;
+    fill: $rf-muted;
+  }
+
+  // HTML/CSS block flow (FPGA, high-speed)
+  .rf-flow {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .rf-node {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.15rem;
+    min-width: 0;
+    padding: 0.6rem 0.75rem;
+    border: 2px solid $rf-accent;
+    border-radius: 0.375rem;
+    text-align: center;
+  }
+
+  .rf-node strong {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--global-text-color);
+  }
+
+  .rf-node span {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    color: $rf-muted;
+  }
+
+  .rf-node--context {
+    border: 1.5px dashed $rf-muted;
+  }
+
+  .rf-link {
+    display: flex;
+    flex: 0 0 5.5rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.9rem;
+    padding: 0 0.4rem;
+  }
+
+  .rf-lane {
+    position: relative;
+    display: block;
+    padding-bottom: 0.4rem;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    text-align: center;
+    color: $rf-muted;
+  }
+
+  .rf-lane::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 0;
+    border-top: 2px solid $rf-accent;
+  }
+
+  .rf-lane::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+
+  .rf-lane--fwd::after {
+    right: -2px;
+    border-left: 8px solid $rf-accent;
+  }
+
+  .rf-lane--rev::after {
+    left: -2px;
+    border-right: 8px solid $rf-accent;
+  }
+
+  .rf-flow--vertical {
+    @include bics-research-flow-vertical;
+  }
+
+  .rf-earlier {
+    margin-top: 2.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid $rf-rule;
+    font-size: 0.92rem;
+    color: $rf-muted;
+  }
+
+  // Narrow screens: one column, every flow turns vertical
+  @media (max-width: 767.98px) {
+    .rf-split,
+    .rf-split--reverse {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+
+    .rf-split--reverse .rf-figure {
+      order: 0;
+    }
+
+    .rf-split .rf-figure {
+      width: 100%;
+      max-width: 22rem;
+      margin: 1.25rem auto 0;
+    }
+
+    .rf-figure--wide {
+      max-width: 22rem;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .rf-flow {
+      @include bics-research-flow-vertical;
+    }
+  }
+}
