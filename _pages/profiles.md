@@ -41,7 +41,7 @@ B.S. / M.S. / Ph.D. in Electrical Engineering, KAIST. Previously Senior Engineer
 | :--- | :---: | :--- |
 | <img class="bics-member-photo" src="{{ '/assets/img/members/byungmu-kang.jpg' | relative_url }}" alt="Byungmu Kang" width="72" height="96" loading="lazy" decoding="async">Byungmu Kang | 2025 | AI-enabled smart sensor systems |
 | <img class="bics-member-photo" src="{{ '/assets/img/members/kyeongju-kim.jpg' | relative_url }}" alt="Kyeongju Kim" width="72" height="96" loading="lazy" decoding="async">Kyeongju Kim | 2025 | Wireless power transfer |
-| <img class="bics-member-photo" src="{{ '/assets/img/members/lee-geunchae-2026.jpg' | relative_url }}" alt="이근채" width="72" height="96" loading="lazy" decoding="async"><span lang="ko">이근채</span> | 2026 | AI hardware accelerators |
+| <img class="bics-member-photo" src="{{ '/assets/img/members/lee-geunchae-2026.jpg' | relative_url }}" alt="Geunchae Lee" width="72" height="96" loading="lazy" decoding="async">Geunchae Lee | 2026 | AI hardware accelerators |
 
 </div>
 
