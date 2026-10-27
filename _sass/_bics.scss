@@ -36,8 +36,12 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="dark"] .bics-brand {
-  .bics-brand-light { display: none; }
-  .bics-brand-dark { display: block; }
+  .bics-brand-light {
+    display: none;
+  }
+  .bics-brand-dark {
+    display: block;
+  }
 }
 
 body.fixed-top-nav {
@@ -136,21 +140,25 @@ body :is(h1, h2, h3, h4, h5, h6) {
   }
 }
 
-
 .bics-roster {
   max-width: 100%;
   overflow-x: auto;
   margin-bottom: 1rem;
 
-  table { width: 100%; }
+  table {
+    width: 100%;
+  }
 
-  th, td {
+  th,
+  td {
     overflow-wrap: normal;
     word-break: normal;
     padding: 0.6rem 0.45rem;
   }
 
-  th { white-space: nowrap; }
+  th {
+    white-space: nowrap;
+  }
 }
 
 .publications h2.bibliography {

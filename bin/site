@@ -1,0 +1,192 @@
+#!/usr/bin/env python3
+"""Reproducible consumer-site checks; never stages, commits, or publishes."""
+import argparse
+import functools
+import http.server
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+
+ROOT = Path(__file__).resolve().parent.parent
+OUTPUT = ROOT / "output/site"
+TMP = OUTPUT / "tmp"
+
+
+class SiteError(Exception):
+    pass
+
+
+def run(args, *, env=None, capture=False):
+    result = subprocess.run(args, cwd=ROOT, env=env, text=True,
+                            stdout=subprocess.PIPE if capture else None,
+                            stderr=subprocess.PIPE if capture else None)
+    if result.returncode:
+        if capture:
+            print(result.stderr.strip(), file=sys.stderr)
+        raise SiteError(f"Command failed ({result.returncode}): {' '.join(map(str, args))}")
+    return result.stdout if capture else None
+
+
+def environment():
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    candidate = Path(os.environ.get("TMPDIR", str(TMP))).resolve()
+    scratch = candidate if candidate.is_relative_to(ROOT) else TMP
+    scratch.mkdir(parents=True, exist_ok=True)
+    env = dict(os.environ, TMPDIR=str(scratch), JEKYLL_ENV="production",
+               PYTHONDONTWRITEBYTECODE="1", BUNDLE_FROZEN="true")
+    # Prefer a working Ruby >= 3.3. The system Ruby on macOS is too old.
+    ruby = shutil.which("ruby", path=env.get("PATH"))
+    if ruby:
+        version = subprocess.run([ruby, "-e", "print RUBY_VERSION"], capture_output=True, text=True)
+        match = re.match(r"(\d+)\.(\d+)", version.stdout)
+        if match and tuple(map(int, match.groups())) >= (3, 3):
+            return env
+    for directory in ("/opt/homebrew/opt/ruby/bin", "/usr/local/opt/ruby/bin"):
+        if (Path(directory) / "ruby").is_file():
+            env["PATH"] = directory + os.pathsep + env.get("PATH", "")
+            return env
+    raise SiteError("Ruby >= 3.3 and Bundler are required (CI uses Ruby 3.3.5). Install Ruby, then run bundle install.")
+
+
+def dependencies(env, *, node=False):
+    for tool in (["bundle", "node", "npm"] if node else ["bundle"]):
+        if not shutil.which(tool, path=env.get("PATH")):
+            raise SiteError(f"Missing {tool}. Install Ruby/Bundler and Node.js 22/npm, then run bundle install and npm ci.")
+    run(["bundle", "check"], env=env)
+    if node and not (ROOT / "node_modules/prettier/package.json").is_file():
+        raise SiteError("Missing locked JavaScript dependencies. Run npm ci in this checkout.")
+
+
+def checker(env, *args):
+    run(["bundle", "exec", "ruby", "test/site_contract.rb", *args], env=env)
+
+
+def build(env):
+    print("[site] Production Jekyll build", flush=True)
+    run(["bundle", "exec", "jekyll", "build", "--trace"], env=env)
+
+
+def unit(env):
+    run(["bundle", "exec", "ruby", "test/test_site_contract.rb"], env=env)
+    run([sys.executable, "-B", "-m", "unittest", "discover", "-s", "test", "-p", "test_site*.py"], env=env)
+    # This upstream test uses its own temporary fixture, never the lab sources.
+    run(["bash", "test/integration_upgrade_cli.sh"], env=env)
+
+
+def port_number(value):
+    try:
+        port = int(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("port must be an integer from 1024 to 65535") from exc
+    if not 1024 <= port <= 65535:
+        raise argparse.ArgumentTypeError("port must be from 1024 to 65535")
+    return port
+
+
+def preview(port):
+    directory = ROOT / "_site"
+    if not (directory / "index.html").is_file():
+        raise SiteError("No built site. Run bin/site build before preview.")
+    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(directory))
+    with http.server.ThreadingHTTPServer(("127.0.0.1", port), handler) as server:
+        print(f"[site] Preview: http://127.0.0.1:{port}/ (Ctrl-C to stop)", flush=True)
+        server.serve_forever()
+
+
+def deploy_status(sha):
+    if not re.fullmatch(r"[0-9a-fA-F]{40}", sha):
+        raise SiteError("--sha requires the full 40-character Git commit SHA.")
+    exact = run(["git", "rev-parse", "--verify", sha + "^{commit}"], capture=True).strip()
+    if exact.lower() != sha.lower():
+        raise SiteError("Requested SHA did not resolve to the exact commit.")
+    if not shutil.which("gh"):
+        raise SiteError("Remote CI status requires GitHub CLI (gh) and existing repository authentication.")
+    changes = set(run(["git", "diff-tree", "--root", "--no-commit-id", "--name-only", "-m", "-r", exact], capture=True).splitlines())
+    # Match render-cv.yml's path triggers; the web CV page is not PDF input.
+    cv_paths = {"_data/cv.yml", "requirements-cv.txt", "bin/export_cv.py",
+                "test/test_export_cv.py", ".github/workflows/render-cv.yml"}
+    # One request, no polling: include every run for this SHA, regardless of branch.
+    # Paginate so a busy repository cannot hide a required workflow run.
+    raw = run(["gh", "api", "--paginate", "--slurp",
+               f"repos/{{owner}}/{{repo}}/actions/runs?head_sha={exact}&per_page=100"], capture=True)
+    runs = [item for page in json.loads(raw) for item in page["workflow_runs"]]
+    required = {"unit-tests.yml": "Integration tests", "prettier.yml": "Prettier code formatter",
+                "deploy.yml": "Deploy site", "visual-regression.yml": "Visual regression checks"}
+    cv_runs = [r for r in runs if r.get("path", "").split("/")[-1] == "render-cv.yml" and r.get("head_sha") == exact]
+    if changes & cv_paths or any(path.startswith("assets/rendercv/") for path in changes) or cv_runs:
+        required["render-cv.yml"] = "Render a CV"
+    results = []
+    failures = []
+    for workflow, label in required.items():
+        matches = [r for r in runs if r.get("head_sha") == exact
+                   and r.get("path", "").split("/")[-1] == workflow]
+        # PR deployment runs only validate; they do not publish gh-pages.
+        if workflow == "deploy.yml":
+            matches = [r for r in matches if r.get("event") in ("push", "workflow_dispatch")]
+        latest = max(matches, key=lambda r: (r.get("run_number", 0), r.get("run_attempt", 1), r["id"]), default=None)
+        result = {"workflow": label, "source_sha": exact, "state": "missing"}
+        if latest:
+            result.update(state=latest["status"], conclusion=latest.get("conclusion"),
+                          run_id=latest["id"], url=latest["html_url"])
+        results.append(result)
+        if latest is None or latest["status"] != "completed" or latest.get("conclusion") != "success":
+            failures.append(label)
+    print(json.dumps({"source_sha": exact, "remote_ci": results,
+                      "scope": "One-shot remote CI status only. Live HTTP/render verification is a separate manual step."}, indent=2))
+    if failures:
+        raise SiteError("Remote CI missing, pending, or unsuccessful for exact SHA: " + ", ".join(failures))
+
+
+def parser():
+    cli = argparse.ArgumentParser(description=__doc__)
+    commands = cli.add_subparsers(dest="command", required=True)
+    for name, help_text in (("check", "source, unit, locked formatter, production build, output checks"),
+                            ("build", "production Jekyll build"),
+                            ("source", "consumer source contract"),
+                            ("unit", "checker and CLI regression tests"),
+                            ("output", "validate an already-built _site")):
+        commands.add_parser(name, help=help_text)
+    serve = commands.add_parser("preview", help="serve existing _site on loopback only")
+    serve.add_argument("--port", type=port_number, default=4444)
+    status = commands.add_parser("status", help="one-shot exact-source remote CI status; live verification is separate")
+    status.add_argument("--sha", required=True)
+    return cli
+
+
+def main(argv=None):
+    args = parser().parse_args(argv)
+    try:
+        if args.command == "preview":
+            preview(args.port)
+        elif args.command == "status":
+            deploy_status(args.sha)
+        else:
+            env = environment()
+            dependencies(env, node=args.command in ("check", "unit"))
+            if args.command == "check":
+                checker(env, "source")
+                unit(env)
+                run(["npm", "run", "lint:prettier"], env=env)
+                build(env)
+                checker(env, "output", "--manifest", str(OUTPUT / "site-manifest.json"))
+                print("[site] All core checks passed. Publishing remains a separate action.")
+            elif args.command == "build":
+                build(env)
+            elif args.command == "unit":
+                unit(env)
+            else:
+                checker(env, args.command, *(["--manifest", str(OUTPUT / "site-manifest.json")] if args.command == "output" else []))
+    except (SiteError, OSError, ValueError) as exc:
+        print(f"[site] ERROR: {exc}", file=sys.stderr)
+        return 1
+    except KeyboardInterrupt:
+        return 130
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

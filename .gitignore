@@ -22,3 +22,17 @@ vendor
 .claude/settings.local.json
 .project-status.md
 design/
+
+# Generated responsive-test reports and Python bytecode.
+playwright-report/
+__pycache__/
+*.pyc
+
+# Also ignore a local read-only node_modules symlink.
+/node_modules
+
+# Reusable local/CI site-check artifacts.
+/output/site/
+
+# Optional RenderCV artifacts (owned by the CV export workflow).
+/output/cv/

@@ -1,4 +1,5 @@
 name: Render a CV
+
 on:
   push:
     branches:
@@ -6,53 +7,69 @@ on:
       - master
     paths:
       - "_data/cv.yml"
-      - "assets/rendercv/design.yaml"
-      - "assets/rendercv/locale.yaml"
-      - "assets/rendercv/settings.yaml"
+      - "bin/export_cv.py"
+      - "test/test_export_cv.py"
+      - "requirements-cv.txt"
+      - "assets/rendercv/**"
+      - ".github/workflows/render-cv.yml"
+  pull_request:
+    paths:
+      - "_data/cv.yml"
+      - "bin/export_cv.py"
+      - "test/test_export_cv.py"
+      - "requirements-cv.txt"
+      - "assets/rendercv/**"
+      - ".github/workflows/render-cv.yml"
   workflow_call:
   workflow_dispatch:
+
 permissions:
-  contents: write
+  contents: read
+
 jobs:
   rendercv:
     name: RenderCV
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      TMPDIR: ${{ github.workspace }}/design/cv-ci/tmp
+      PYTHONDONTWRITEBYTECODE: "1"
     steps:
       - uses: actions/checkout@v4
+      - name: Prepare temporary directory
+        run: mkdir -p "$TMPDIR"
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install RenderCV
+      - name: Install CV dependencies
         run: |
-          pip install -r requirements.txt
-      - name: RenderCV
+          python -m venv design/cv-ci/.venv
+          design/cv-ci/.venv/bin/python -m pip --isolated install --no-cache-dir --index-url https://pypi.org/simple -r requirements-cv.txt
+          echo "$GITHUB_WORKSPACE/design/cv-ci/.venv/bin" >> "$GITHUB_PATH"
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends poppler-utils
+      - name: Test CV export and future-update renders
+        env:
+          CV_RENDER_TESTS: "1"
+        run: python -m unittest discover -s test -p test_export_cv.py -v
+      - name: Export website CV
+        run: python bin/export_cv.py --input _data/cv.yml --output output/cv/rendercv.yaml
+      - name: Render PDF
         run: |
-          cv_file=$(find _data  -maxdepth 1 -type f \( -name "cv.yaml" -o -name "cv.yml" \))
-          if [ -z "$cv_file" ]; then
-            echo "No cv.yml file found!"
-            exit 1
-          fi
-          rendercv_dir=$(find assets -maxdepth 1 -type d -name "rendercv")
-          if [ -z "$rendercv_dir" ]; then
-            echo "No RenderCV config directory found!"
-            exit 1
-          fi
-          settings=$(find $rendercv_dir -maxdepth 1 -type f \( -name "settings.yaml" -o -name "settings.yml" \))
-          if [ -z "$settings" ]; then
-            echo "Missing RenderCV config file!"
-            exit 1
-          fi
-          rendercv render $cv_file --settings $settings
-          rm assets/rendercv/rendercv_output/*.typ
-      - name: Upload rendercv_output as an artifact
+          rendercv render output/cv/rendercv.yaml \
+            --settings "$GITHUB_WORKSPACE/assets/rendercv/settings.yaml" \
+            --design "$GITHUB_WORKSPACE/assets/rendercv/design.yaml" \
+            --locale-catalog "$GITHUB_WORKSPACE/assets/rendercv/locale.yaml"
+      - name: Verify readable PDF and unchanged CV source
+        env:
+          RENDERCV_PDF: output/cv/cv.pdf
+          RENDERCV_YAML: output/cv/rendercv.yaml
+        run: |
+          python -m unittest discover -s test -p test_export_cv.py -k test_rendered_pdf -v
+          git diff --exit-code -- _data/cv.yml
+      - name: Upload CV PDF
         uses: actions/upload-artifact@v4
         with:
-          name: RenderCV Output
-          path: assets/rendercv/rendercv_output
-      - name: Push the changes
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git add -A
-          git commit -m "chore: render the latest CV"
-          git push
+          name: curriculum-vitae
+          path: output/cv/cv.pdf
+          if-no-files-found: error

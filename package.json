@@ -1,15 +1,17 @@
 {
   "scripts": {
-    "lint:prettier": "prettier . --check",
+    "check:site": "bin/site check",
+    "build:site": "bin/site build",
+    "lint:prettier": "node test/site_prettier.mjs",
     "lint:style-contract": "node test/style_contract.js",
-    "test:visual": "playwright test --config test/visual/playwright.config.js",
-    "test:visual:update": "playwright test --config test/visual/playwright.config.js --update-snapshots"
+    "test:site": "bin/site unit",
+    "test:visual": "playwright test --config test/site_playwright.config.js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.56.1",
-    "@shopify/prettier-plugin-liquid": "^1.10.0",
-    "pixelmatch": "^7.1.0",
-    "pngjs": "^7.0.0",
-    "prettier": "^3.8.0"
+    "@playwright/test": "1.58.2",
+    "@shopify/prettier-plugin-liquid": "1.10.0",
+    "pixelmatch": "7.1.0",
+    "pngjs": "7.0.0",
+    "prettier": "3.8.0"
   }
 }

@@ -18,6 +18,8 @@ Co-founder and CIO of XO Semiconductor (xosemi), working on future technology de
 
 ## Postdoctoral Researcher
 
+<!-- prettier-ignore-start -->
+
 <div class="bics-roster" role="region" aria-label="Postdoctoral Researcher" tabindex="0" markdown="1">
 
 | Name | Research |
@@ -26,7 +28,11 @@ Co-founder and CIO of XO Semiconductor (xosemi), working on future technology de
 
 </div>
 
+<!-- prettier-ignore-end -->
+
 ## Ph.D. Students
+
+<!-- prettier-ignore-start -->
 
 <div class="bics-roster" role="region" aria-label="Ph.D. Students" tabindex="0" markdown="1">
 
@@ -36,7 +42,11 @@ Co-founder and CIO of XO Semiconductor (xosemi), working on future technology de
 
 </div>
 
+<!-- prettier-ignore-end -->
+
 ## M.S. Students
+
+<!-- prettier-ignore-start -->
 
 <div class="bics-roster" role="region" aria-label="M.S. Students" tabindex="0" markdown="1">
 
@@ -48,7 +58,11 @@ Co-founder and CIO of XO Semiconductor (xosemi), working on future technology de
 
 </div>
 
+<!-- prettier-ignore-end -->
+
 ## Alumni
+
+<!-- prettier-ignore-start -->
 
 <div class="bics-roster" role="region" aria-label="Alumni" tabindex="0" markdown="1">
 
@@ -62,6 +76,8 @@ Co-founder and CIO of XO Semiconductor (xosemi), working on future technology de
 | Wonhyung Lee | M.S. | 2026 | Leo LSI |
 
 </div>
+
+<!-- prettier-ignore-end -->
 
 ---
 

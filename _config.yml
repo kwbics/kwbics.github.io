@@ -205,6 +205,13 @@ kramdown:
 # Includes & excludes
 include: ["_pages"]
 exclude:
+  - SITE_MAINTENANCE.md
+  - .gh/
+  - .claude/
+  - .codex/
+  - requirements-cv.txt
+  - requirements.txt
+  - playwright-report/
   - test/
   - test-results/
   - output/

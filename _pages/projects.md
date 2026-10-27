@@ -68,6 +68,7 @@ nav_order: 1
           <li><a href="{{ '/publications/' | relative_url }}#lee2022neuralimplant">A Miniaturized Wireless Neural Implant With Body-Coupled Power Delivery and Data Transmission</a><span class="rf-venue">IEEE JSSC, 2022</span></li>
         </ul>
     </div>
+
   </section>
   <!-- FPGA-based systems: full-width horizontal flow -->
   <section class="rf-section" id="fpga-systems" aria-labelledby="fpga-systems-heading">

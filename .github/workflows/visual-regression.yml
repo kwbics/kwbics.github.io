@@ -1,139 +1,107 @@
 name: Visual regression checks
 
 on:
+  push:
+    branches: [main, master, v1.0-dev]
+    paths:
+      - "_config.yml"
+      - "_data/**"
+      - "_pages/**"
+      - "_posts/**"
+      - "_news/**"
+      - "_projects/**"
+      - "_teachings/**"
+      - "_books/**"
+      - "_bibliography/**"
+      - "_sass/**"
+      - "_includes/**"
+      - "_layouts/**"
+      - "_plugins/**"
+      - "assets/**"
+      - "test/**"
+      - "bin/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".prettierignore"
+      - ".prettierrc*"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - ".github/workflows/**"
+      - "SITE_MAINTENANCE.md"
   pull_request:
     branches: [main, master, v1.0-dev]
     paths:
       - "_config.yml"
       - "_data/**"
-      - "_bibliography/**"
       - "_pages/**"
       - "_posts/**"
+      - "_news/**"
       - "_projects/**"
-      - "assets/**"
-      - "test/visual/**"
-      - ".github/workflows/visual-regression.yml"
-      - "package.json"
-      - "package-lock.json"
-      - "Gemfile"
-      - "Gemfile.lock"
-  push:
-    branches: [v1.0-dev]
-    paths:
-      - "_config.yml"
-      - "_data/**"
+      - "_teachings/**"
+      - "_books/**"
       - "_bibliography/**"
-      - "_pages/**"
-      - "_posts/**"
-      - "_projects/**"
+      - "_sass/**"
+      - "_includes/**"
+      - "_layouts/**"
+      - "_plugins/**"
       - "assets/**"
-      - "test/visual/**"
-      - ".github/workflows/visual-regression.yml"
+      - "test/**"
+      - "bin/**"
       - "package.json"
       - "package-lock.json"
+      - ".prettierignore"
+      - ".prettierrc*"
       - "Gemfile"
       - "Gemfile.lock"
+      - ".github/workflows/**"
+      - "SITE_MAINTENANCE.md"
+
+permissions:
+  contents: read
 
 jobs:
   visual-regression:
-    runs-on: ubuntu-latest
+    # Responsive/navigation checks of this site; no upstream tag or sample blogs.
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
+    env:
+      TMPDIR: ${{ github.workspace }}/output/site/tmp
     steps:
-      - name: Checkout candidate 🛎️
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Ruby 💎
+      - name: Prepare worktree scratch
+        run: mkdir -p "$TMPDIR"
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3.5"
           bundler-cache: true
-
-      - name: Setup Node 🧰
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
-
-      - name: Install JS deps 📦
+          node-version: "22"
+          cache: npm
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install locked JavaScript dependencies
         run: npm ci
-
-      - name: Prepare baseline worktree (v0.16.3) 🧱
-        run: |
-          git worktree add ../al-folio-baseline v0.16.3
-          (cd ../al-folio-baseline && bundle install && npm ci)
-
-      - name: Install Jupyter + ImageMagick runtime deps 🧰
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y imagemagick python3-pip
-          pip3 install --user jupyter nbconvert
-
-      - name: Install Playwright browser 🧪
-        run: npx playwright install --with-deps chromium webkit
-
-      - name: Run visual parity checks 👀
-        env:
-          BASELINE_URL: http://127.0.0.1:4100
-          NO_WEBSERVER: "1"
-        run: |
-          set -euo pipefail
-          export PATH="$HOME/.local/bin:$PATH"
-
-          (cd ../al-folio-baseline && bundle exec jekyll serve --host 127.0.0.1 --port 4100 --baseurl /al-folio --quiet > /tmp/jekyll-baseline.log 2>&1) &
-          BASELINE_PID=$!
-          (bundle exec jekyll serve --host 127.0.0.1 --port 4000 --baseurl /al-folio --quiet > /tmp/jekyll-candidate.log 2>&1) &
-          CANDIDATE_PID=$!
-
-          cleanup() {
-            kill "$BASELINE_PID" "$CANDIDATE_PID" >/dev/null 2>&1 || true
-          }
-          trap cleanup EXIT
-
-          READY=0
-          for _ in {1..150}; do
-            if curl -fsS http://127.0.0.1:4000/al-folio/ >/dev/null && curl -fsS http://127.0.0.1:4100/al-folio/ >/dev/null; then
-              READY=1
-              break
-            fi
-
-            if ! kill -0 "$BASELINE_PID" >/dev/null 2>&1 || ! kill -0 "$CANDIDATE_PID" >/dev/null 2>&1; then
-              echo "Jekyll server exited before becoming ready."
-              echo "--- baseline log ---"
-              cat /tmp/jekyll-baseline.log || true
-              echo "--- candidate log ---"
-              cat /tmp/jekyll-candidate.log || true
-              exit 1
-            fi
-            sleep 2
-          done
-
-          if [ "$READY" -ne 1 ]; then
-            echo "Timed out waiting for Jekyll servers (5 minutes)."
-            echo "--- baseline log ---"
-            cat /tmp/jekyll-baseline.log || true
-            echo "--- candidate log ---"
-            cat /tmp/jekyll-candidate.log || true
-            exit 1
-          fi
-
-          npm run test:visual -- --reporter=line
-
-      - name: Upload Playwright report 📄
-        if: always()
+      - name: Install image build runtime
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+      - name: Validate and build actual site
+        run: npm run check:site
+      - name: Install CI browser
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Check responsive site behavior
+        run: npm run test:visual
+      - name: Upload failure screenshots, traces, and report
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
-          path: playwright-report
-          if-no-files-found: ignore
-
-      - name: Upload Jekyll logs 📄
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: jekyll-visual-logs
+          name: site-responsive-failure
           path: |
-            /tmp/jekyll-baseline.log
-            /tmp/jekyll-candidate.log
+            output/site/test-results/
+            output/site/playwright-report/
           if-no-files-found: ignore
+          retention-days: 7
