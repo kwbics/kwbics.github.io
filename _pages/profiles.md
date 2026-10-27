@@ -9,10 +9,12 @@ nav_order: 3
 
 ## Principal Investigator
 
-**Joonsung Bae**, Ph.D. — Associate Professor, Dept. of Electrical and Electronics Engineering, Kangwon National University.
-B.S. / M.S. / Ph.D. in Electrical Engineering, KAIST. Previously Senior Engineer at Samsung Electronics (Memory) and R&D researcher at imec, Belgium. Technical Program Committee member of IEEE ISSCC and A-SSCC.
+**Joonsung Bae**, Ph.D. — Associate Professor, Dept. of Electrical and Electronics Engineering, Kangwon National University (Assistant Professor 2017–2022; Associate Professor since 2022).
+B.S. / M.S. / Ph.D. in Electrical Engineering, KAIST. Previously Senior Engineer at Samsung Electronics (Memory), postdoctoral researcher at KAIST, and research staff member at imec, Belgium. Has served on the Technical Program Committees of IEEE ISSCC and A-SSCC.
 
-Co-founder and CIO of XO Semiconductor (xosemi), working on future technology development, high-speed interface design, and FPGA-based data capture.
+Co-founder and CIO of XO Semiconductor (xosemi) since 2024, working on future technology development, including medical imaging sensor circuits, high-speed interface design, and FPGA-based data capture.
+
+Honors include the Outstanding Researcher of the Month Award from the Industry-University Cooperation Foundation of Kangwon National University (2022) and the IEEE A-SSCC Student Design Contest Best Design Award (1st prize; 2011, and 2014 as co-recipient).
 
 ✉ [baej@kangwon.ac.kr](mailto:baej@kangwon.ac.kr) · [Google Scholar](https://scholar.google.com/citations?user=DvZKLt8AAAAJ)
 

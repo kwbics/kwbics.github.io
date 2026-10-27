@@ -7,10 +7,11 @@ cv:
   summary: >
     Associate Professor of Electrical and Electronics Engineering at Kangwon National University,
     directing Bae's Integrated Circuits and Systems Lab (BICS), and co-founder and CIO of
-    XO Semiconductor (xosemi). Technical Program Committee member of IEEE ISSCC (since 2018) and
-    IEEE A-SSCC (since 2021). Research on mixed-signal integrated circuits and system architectures
-    for neural interfaces, FPGA-based sensor systems, and high-speed wireline interfaces, including
-    high-speed interface design and FPGA-based data capture.
+    XO Semiconductor (xosemi). Research on analog, RF, and mixed-signal integrated circuits and
+    system architectures for neural and biomedical interfaces, ultra-low-power wireless links for
+    medical devices, AI-enabled sensor systems, medical imaging, and high-speed interfaces with
+    FPGA-based data capture. Has served on the Technical Program Committees of IEEE ISSCC and
+    IEEE A-SSCC.
 
   social_networks:
     - network: Google Scholar
@@ -24,9 +25,17 @@ cv:
     countryCode: KR
 
   sections:
-    Industry Role:
-      - label: Co-founder and CIO, XO Semiconductor (xosemi)
-        details: Future technology development, high-speed interface design, and FPGA-based data capture.
+    Research Interests:
+      - label: Integrated circuits
+        details: Analog, RF, and mixed-signal CMOS integrated circuits.
+      - label: Biomedical and neural interfaces
+        details: Biomedical circuits and systems for healthcare IoT; neural interface and brain-computer interface systems.
+      - label: Wireless
+        details: Ultra-low-power wireless communication for medical devices.
+      - label: Sensing and imaging
+        details: AI-enabled smart sensor systems and edge computing; X-ray and ultrasound medical imaging systems.
+      - label: High-speed interfaces
+        details: High-speed interface design and FPGA-based data capture.
 
     Education:
       - institution: Korea Advanced Institute of Science and Technology (KAIST)
@@ -35,12 +44,18 @@ cv:
         studyType: Ph.D.
         start_date: 2009
         end_date: 2013
+        highlights:
+          - "Advisor: Prof. Hoi-Jun Yoo"
+          - "Dissertation: A Low Energy Wireless Body-Area-Network Transceiver with Scalable Double-FSK Modulation"
       - institution: Korea Advanced Institute of Science and Technology (KAIST)
         location: Daejeon, Korea
         area: Electrical Engineering
         studyType: M.S.
         start_date: 2007
         end_date: 2009
+        highlights:
+          - "Advisor: Prof. Hoi-Jun Yoo"
+          - "Thesis: A Low Power Implantable Transceiver for Medical Body-Area-Networks"
       - institution: Korea Advanced Institute of Science and Technology (KAIST)
         location: Daejeon, Korea
         area: Electrical Engineering
@@ -52,28 +67,73 @@ cv:
       - company: Kangwon National University
         position: Associate Professor, Dept. of Electrical and Electronics Engineering
         location: Chuncheon, Korea
-        start_date: 2017-03-01
+        start_date: "2022-09"
         end_date: Present
-      - company: imec
-        position: R&D Researcher — ultra-low-power biomedical circuits
-        location: Leuven, Belgium
-        start_date: 2015-03-01
-        end_date: 2017-02-28
-      - company: KAIST
-        position: Postdoctoral Researcher
-        location: Daejeon, Korea
-        start_date: 2014-06-01
-        end_date: 2015-02-28
-      - company: Samsung Electronics, Memory Business
-        position: Senior Engineer — PCI-Express 3.0 / M-PHY 3.0 interface ICs
+      - company: XO Semiconductor (xosemi)
+        position: Co-founder and CIO
         location: Korea
-        start_date: 2013-04-01
-        end_date: 2014-05-31
+        start_date: "2024-08"
+        end_date: Present
+        summary: Future technology development, including medical imaging sensor circuits, high-speed interface design, and FPGA-based data capture.
+      - company: Kangwon National University
+        position: Assistant Professor, Dept. of Electrical and Electronics Engineering
+        location: Chuncheon, Korea
+        start_date: "2017-03"
+        end_date: "2022-08"
+      - company: imec
+        position: Research Staff Member, Biomedical Circuits Team
+        location: Leuven, Belgium
+        start_date: "2015-03"
+        end_date: "2017-02"
+        summary: Analog circuit design for multichannel biopotential sensing; project leader in neural sensing and stimulation IC development.
+      - company: KAIST
+        position: Postdoctoral Researcher, Information and Electronics Research Institute
+        location: Daejeon, Korea
+        start_date: "2014-06"
+        end_date: "2015-01"
+      - company: Samsung Electronics, Memory Business
+        position: Senior Engineer, Controller Development Team
+        location: Korea
+        start_date: "2013-04"
+        end_date: "2014-05"
+        summary: PCI Express 3.0 PHY for PCIe solid-state drives and M-PHY 3.0 PHY for Universal Flash Storage (UFS).
+      - company: imec
+        position: Technical Graduate Intern, Dry Electrode Team
+        location: Belgium
+        start_date: "2012-03"
+        end_date: "2012-08"
+        summary: Noise analysis and modeling of surface dry electrodes.
+
+    Professional Service:
+      - label: IEEE International Solid-State Circuits Conference (ISSCC)
+        details: Technical Program Committee Member, Mar 2019 – Feb 2023.
+      - label: IEEE Asian Solid-State Circuits Conference (A-SSCC)
+        details: Technical Program Committee Member, Mar 2021 – Feb 2025.
 
     Awards:
-      - title: Best Design Award — IEEE Asian Solid-State Circuits Conference (A-SSCC)
-        date: 2014
-      - title: Best Design Award — IEEE Asian Solid-State Circuits Conference (A-SSCC)
-        date: 2011
-      - title: Global Ph.D. Internship Scholarship — National Research Foundation of Korea
-        date: 2012
+      - title: Outstanding Researcher of the Month Award
+        date: "2022-12"
+        summary: Industry-University Cooperation Foundation of Kangwon National University.
+        url: "https://uicf.kangwon.ac.kr/UicfNews/Detail?ReturnUrl=%2FUicfNews%2Flist%3Fpage%3D4&UicfNewsIndex=17"
+      - title: IEEE A-SSCC Student Design Contest Best Design Award (1st Prize, co-recipient)
+        date: "2014-11"
+        summary: Co-recipient of the 1st Prize at the 2014 IEEE Asian Solid-State Circuits Conference Student Design Contest.
+      - title: Global Internship Scholarship
+        date: "2012-02"
+        summary: National Research Foundation of Korea.
+      - title: IEEE A-SSCC Student Design Contest Best Design Award (1st Prize)
+        date: "2011-11"
+        summary: Recipient of the 1st Prize at the 2011 IEEE Asian Solid-State Circuits Conference Student Design Contest.
+      - title: Outstanding KAIST Electrical Engineering Research Award
+        date: "2009–2012"
+        summary: Received for four consecutive years.
+
+    Awards for Supervised Work:
+      - label: Best Poster Award, ISOCC 2020 Chip Design Contest (Oct 2020)
+        details: Advisor. International SoC Design Conference (ISOCC) Chip Design Contest.
+      - label: IEIE Award, 2020 Semiconductor Design Contest (Oct 2020)
+        details: Advisor. Award of the Institute of Electronics and Information Engineering (IEIE) at the contest organized by the Korea Semiconductor Industry Association (KSIA).
+      - label: Minister of Trade, Industry and Energy Award, 2018 Semiconductor Design Contest (Oct 2018)
+        details: Advisor. Contest organized by the Korea Semiconductor Industry Association (KSIA).
+      - label: Minister of Trade, Industry and Energy Award, 2017 Capstone Design Contest (Nov 2017)
+        details: Advisor. Contest organized by the Engineering Education Information Center (EEIC).
