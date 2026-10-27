@@ -1,14 +1,16 @@
 cv:
   name: Joonsung Bae
-  label: Associate Professor — Analog / Mixed-Signal IC Design
+  label: Associate Professor; Co-founder and CIO at XO Semiconductor
   email: baej@kangwon.ac.kr
   location: Chuncheon, Republic of Korea
   image: "" # al_folio_cv (rendercv) layout renders no profile photo; home page shows it instead
   summary: >
     Associate Professor of Electrical and Electronics Engineering at Kangwon National University,
-    directing Bae's Integrated Circuits and Systems Lab (BICS). Technical Program Committee member of
-    IEEE ISSCC (since 2018) and IEEE A-SSCC (since 2021). Research on energy-efficient mixed-signal
-    integrated circuits and systems for biomedical sensors, neural interfaces, and body-area networks.
+    directing Bae's Integrated Circuits and Systems Lab (BICS), and co-founder and CIO of
+    XO Semiconductor (xosemi). Technical Program Committee member of IEEE ISSCC (since 2018) and
+    IEEE A-SSCC (since 2021). Research on mixed-signal integrated circuits and system architectures
+    for neural interfaces, FPGA-based sensor systems, and high-speed wireline interfaces, including
+    high-speed interface design and FPGA-based data capture.
 
   social_networks:
     - network: Google Scholar
@@ -22,6 +24,10 @@ cv:
     countryCode: KR
 
   sections:
+    Industry Role:
+      - label: Co-founder and CIO, XO Semiconductor (xosemi)
+        details: Future technology development, high-speed interface design, and FPGA-based data capture.
+
     Education:
       - institution: Korea Advanced Institute of Science and Technology (KAIST)
         location: Daejeon, Korea

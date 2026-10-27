@@ -104,6 +104,11 @@ body :is(h1, h2, h3, h4, h5, h6) {
     overflow-wrap: anywhere;
   }
 
+  .cv .table-cv.table-borderless td:first-child {
+    min-width: 7rem;
+    overflow-wrap: normal;
+  }
+
   .table-responsive,
   .table-wrapper,
   .bootstrap-table,

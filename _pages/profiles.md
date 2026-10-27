@@ -11,6 +11,9 @@ nav_order: 3
 
 **Joonsung Bae**, Ph.D. — Associate Professor, Dept. of Electrical and Electronics Engineering, Kangwon National University.
 B.S. / M.S. / Ph.D. in Electrical Engineering, KAIST. Previously Senior Engineer at Samsung Electronics (Memory) and R&D researcher at imec, Belgium. Technical Program Committee member of IEEE ISSCC and A-SSCC.
+
+Co-founder and CIO of XO Semiconductor (xosemi), working on future technology development, high-speed interface design, and FPGA-based data capture.
+
 ✉ [baej@kangwon.ac.kr](mailto:baej@kangwon.ac.kr) · [Google Scholar](https://scholar.google.com/citations?user=DvZKLt8AAAAJ)
 
 ## Postdoctoral Researcher

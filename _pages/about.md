@@ -33,4 +33,6 @@ Welcome to **KANGWON BICS** — *Bae's Integrated Circuits and Systems Lab* at K
 
 **Joonsung Bae** is an Associate Professor in the Department of Electrical and Electronics Engineering at Kangwon National University. He received the B.S. (2007), M.S. (2009), and Ph.D. (2013) degrees in Electrical Engineering from KAIST. He was a Senior Engineer at Samsung Electronics (Memory Business, 2013–2014), an R&D researcher at [imec](https://www.imec-int.com/){:target="_blank"}, Belgium (2015–2017), and joined Kangwon National University in 2017. He serves on the Technical Program Committees of IEEE ISSCC (since 2018) and IEEE A-SSCC (since 2021), and received the A-SSCC Best Design Award in 2011 and 2014.
 
+He is also a co-founder and CIO of XO Semiconductor (xosemi), where he works on future technology development, high-speed interface design, and FPGA-based data capture. This industry work connects with the lab's research on neural interfaces, FPGA-based sensor systems, and high-speed wireline links.
+
 **We are recruiting.** Graduate research assistant positions are open for students interested in analog/mixed-signal IC design, biomedical SoCs, wireless power/data links, and neural interfaces. Prospective students are welcome to reach out by [email](mailto:baej@kangwon.ac.kr).
