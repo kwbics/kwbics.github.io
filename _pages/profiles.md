@@ -36,7 +36,7 @@ Honors include the Outstanding Researcher of the Month Award from the Industry-U
 
 <!-- prettier-ignore-start -->
 
-<div class="bics-roster" role="region" aria-label="Ph.D. Students" tabindex="0" markdown="1">
+<div class="bics-roster bics-student-roster" role="region" aria-label="Ph.D. Students" tabindex="0" markdown="1">
 
 | Name | Since | Research |
 | :--- | :---: | :--- |
@@ -50,7 +50,7 @@ Honors include the Outstanding Researcher of the Month Award from the Industry-U
 
 <!-- prettier-ignore-start -->
 
-<div class="bics-roster" role="region" aria-label="M.S. Students" tabindex="0" markdown="1">
+<div class="bics-roster bics-student-roster" role="region" aria-label="M.S. Students" tabindex="0" markdown="1">
 
 | Name | Since | Research |
 | :--- | :---: | :--- |
