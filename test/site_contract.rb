@@ -14,7 +14,7 @@ require "jekyll"
 class SiteContract
   # These are intentional consumer customizations. New theme overrides require
   # an explicit review of this list; vendored layouts/runtime remain forbidden.
-  OVERRIDES = %w[_includes/header.liquid _sass/_bics.scss _sass/_bics_research.scss assets/css/main.scss].freeze
+  OVERRIDES = %w[_includes/header.liquid _sass/_bics.scss _sass/_bics_research.scss assets/css/main.scss _plugins/bics_cache_bust.rb].freeze
   RUNTIME_TREES = %w[_includes _layouts _sass _plugins _scripts assets/tailwind assets/webfonts assets/fonts assets/js assets/css].freeze
   PRIVATE_PATHS = %w[design output .gh .claude .codex test bin docs .project-status.md AGENTS.md CLAUDE.md
                      UPSTREAM_AGENTS.md UPSTREAM_CLAUDE.md requirements-cv.txt SITE_MAINTENANCE.md].freeze

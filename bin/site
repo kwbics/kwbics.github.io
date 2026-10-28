@@ -72,6 +72,7 @@ def build(env):
 
 def unit(env):
     run(["bundle", "exec", "ruby", "test/test_site_contract.rb"], env=env)
+    run(["bundle", "exec", "ruby", "test/test_bics_cache_bust.rb"], env=env)
     run([sys.executable, "-B", "-m", "unittest", "discover", "-s", "test", "-p", "test_site*.py"], env=env)
     # This upstream test uses its own temporary fixture, never the lab sources.
     run(["bash", "test/integration_upgrade_cli.sh"], env=env)
